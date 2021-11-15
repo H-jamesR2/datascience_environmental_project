@@ -13,3 +13,6 @@ https://towardsdatascience.com/how-to-convert-json-into-a-pandas-dataframe-100b2
 https://pyshark.com/convert-json-to-pandas-dataframe-in-python/
 
 https://www.google.com/search?client=safari&rls=en&q=convert+json+to+df+maps&ie=UTF-8&oe=UTF-8
+
+API_user_email = "Hilarion.Reyes12@myhunter.cuny.edu"
+API_user_key = "amberram68"
