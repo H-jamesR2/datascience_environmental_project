@@ -129,7 +129,7 @@ dmypy.json
 .pyre/
 
 # API keys:
-./secrets.py
+secrets.py
 
 # Notes
-./notes.txt
+notes.txt
