@@ -9,6 +9,7 @@
     <style>
     A {text-decoration: none;}
     th, td { padding: 5px; }
+    
     code {
     background-color: #eeeeee;
     }
@@ -34,12 +35,234 @@
 </head>
 
 <body>
-    <div style="margin: 15px;width=100%;">
-        <span style="float: right">
-            <a href="https://github.com/Jamswhat2/datascience_environmental_project">Github_Repo</a>
-        </span>
-    </div>
-    <!-- Analysis-->
-    <!-- Visualization -->
-    <!-- Video -->
+    
+<div style="margin: 15px;width = 100%;">
+    <span style="float: right">
+        <a href="https://github.com/Jamswhat2/datascience_environmental_project">Github_Repo</a>
+    </span>
+</div>
+<br>
+    <!-- Analysis--><!-- Visualization -->
+<div style="margin:20px">
+
+<h2> New York City Quarantine Analysis on Greenhouse Gas Emissions
+    
+</h2>
+<img src=imgs/nyc_fumes.jpg></img>
+<hr>
+<a href="index.html#overview">Overview</a>&nbsp;&nbsp;&nbsp;
+<a href="index.html#data">Data</a>&nbsp;&nbsp;&nbsp;
+<a href="index.html#techniques">Techniques</a>&nbsp;&nbsp;&nbsp;
+<a href="index.html#visualizations">Visualizations</a>&nbsp;&nbsp;&nbsp;
+<a href="index.html#nextsteps">Next Steps</a>&nbsp;&nbsp;&nbsp;
+<a href="index.html#citations">Citations</a>&nbsp;&nbsp;&nbsp;
+<hr>
+
+<a name="overview">
+<h3>Overview: </h3>
+    <p>My underlying hypothesis was that during the momentous Quarantine Periods 
+        (1st quarter of 2020 to 1st quarter of 2021) 
+        we would see a dramatic decrease in certain emissions and thus a noticeable 
+        increase in air quality as would be detected in the data. </p>
+    <p>The data I used to explore my hypothesis was generated in a quarterly manner during 
+        the time period between the 2nd Quarter of 2019 and 2nd Quarter of 2021 and 
+        indexed across the 5 major boroughs of NYC (Bronx, Queens, Manhattan, Brooklyn, Staten Island)
+        in attempt to use Linear Regression to conceive a trend.</p>
+    <p>I mainly used pandas, urllib.request, json to generate JSON data for dataframes for the csv files 
+        needed for easy data indexing and pandas, NumPy, seaborn, matplotlib as 
+        tools for generating the plots and tables on such data.
+        
+
+<a name="data">
+<h3> Data: </h3>
+<p> The main data source for this project is:</p>
+<ul>
+    <li> generated through the aqs.epa.gov data API and is indexed at the
+    <li> quarterlyData, byCounty level generating JSON files which can be converted to
+    <li> csv files for each particular borough which we can use for analysis and visualization later on.
+    <li>A <a href= "https://aqs.epa.gov/data/api/quarterlyData/byCounty?email=test@aqs.api&key=test&param=45201&bdate=20200101&edate=20201231&state=36&county=005" target="_blank" rel="noopener noreferrer">
+        Sample Bronx 2020 Benzene Query</a>
+        is clickable as a sample.
+</ul>
+
+<a name="techniques">
+<h3>Techniques:</h3>
+<p> The first technique I used was to setup a protocol to sort and clean the preceding query JSON 
+    dataframes before they were merged to the main borough dataframe. 
+    This technique is very important as since the queries were typically generating by parameter, sorting and cleaning them 
+    beforehand improves our data accessing procedures for later visualization and analysis procedures.
+    <br>- Tools: json, urllib.request, pandas
+</p>
+<p> The second technique I used was to access the arithmetic means (automatically generated through quarterlyData indexing) 
+    and generating seaborn barplots based on median estimators.
+    </p>
+<p> The third technique I used is to generate tables and rate_of_change line plots 
+    using pandas and seaborn to gauge the truth of my hypothesis and comparing
+    the rate of change from quarter to quarter in a particular year onto another year
+    (e.g. 2020q1_to_q2 vs. 2021q1_toq2).
+    </p>
+
+<a name="visualizations">
+<h3>Visualizations:</h3>
+
+<hr>
+<a href="index.html#bronx">Bronx</a>&nbsp;&nbsp;&nbsp;
+<a href="index.html#queens">Queens</a>&nbsp;&nbsp;&nbsp;
+<a href="index.html#manhattan">Manhattan</a>&nbsp;&nbsp;&nbsp;
+<hr>
+
+<ul>
+    <p> <b>#NOTES:</b> <br>
+        The EPA API queries was not able to provide data with regards to the following boroughs/counties: <br>
+        brooklyn, staten island; <br>
+        and was not able to index pollutant parameters: <br>
+        "42605": Nitrous Oxide, "42102": CO2 (Carbon Dioxide),
+        "43201": Methane <br>
+        as the API simply did not have recorded NYC EPA data on these particular variables... <br>
+        One can manually test this through a
+        <a href="https://aqs.epa.gov/data/api/quarterlyData/byCounty?email=test@aqs.api&key=test&param=42102,42605,43201&bdate=20200101&edate=20201231&state=36&county=047"
+            target="_blank" rel="noopener noreferrer">sample query:</a>
+        (brooklyn,CO2,NO,Methane) and obtain no results...
+    </p>
+</ul>
+<ul>
+    <a name="bronx">
+    <li> <h4>Bronx</h4> 
+    == CO Quarterly BoxPlot+Table, pct_change LinePlot+Table: <br>
+    <img src=imgs/bronx/bronx_CO_boxplot.png max-width=50% height=40% />
+    <img src=imgs/bronx/bronx_CO_TABLE.png max-width=25% height=25% />
+    <br>
+    <img src=imgs/bronx/bronx_CO_pct_lineplot.png max-width=40% height=45% />
+    <img src=imgs/bronx/bronx_CO_pct_change_TABLE.png max-width=30% height=40% />
+    <p>Here, The most significant finding is that from the period
+        between the 1st quarter of 2020 and the 2nd quarter of 2020,
+        Bronx measured a 38% decrease in Carbon Monoxide emissions in contrast to only
+        20% decrease in Carbon Monoxide during the period between
+        the 1st quarter of 2021 and the 2nd quarter of 2021, suggesting
+        a return to normalcy.
+    </p>
+    == NOx Quarterly BoxPlot+Table, pct_change LinePlot+Table: <br>
+    <img src=imgs/bronx/bronx_NOx_boxplot.png max-width=50% height=40% />
+    <img src=imgs/bronx/bronx_NOx_TABLE.png max-width=25% height=25% />
+    <br>
+    <img src=imgs/bronx/bronx_NOx_pct_lineplot.png max-width=40% height=45% />
+    <img src=imgs/bronx/bronx_NOx_pct_change_TABLE.png max-width=30% height=40% />
+    <p>Here, like for the observations with Carbon Monoxide there is a fluctuating 
+        trend of increasing and decreasing with regards to emissions 
+        for Oxides of Nitrogen but we can also observe a lower percentage rate of change
+        when comparing 2020q1_to_q2 to 2021q1_to_q2 suggesting that the period of
+        'cautiousness' (quarantine period) accounting for covid-19 had an effect
+        on transportation movement (most common emittor of NOx).
+    </p>
+    == SO2 Quarterly BoxPlot+Table, pct_change LinePlot+Table: (site110, annual1971)<br>
+    # Note: narrowed down to site110 and standard annual 1971 as data is repetitive
+    and redundant otherwise <br>
+    <img src=imgs/bronx/bronx_SO2_Annual_1971_boxplot.png max-width=50% height=40% />
+    <img src=imgs/bronx/bronx_SO2_Annual_1971_TABLE.png max-width=30% height=40% />
+    <br>
+    <img src=imgs/bronx/bronx_SO2_pct_site110_lineplot.png max-width=40% height=45% />
+    <img src=imgs/bronx/bronx_SO2_pct_change_site110_TABLE.png max-width=30% height=40% />
+    <p> Here, surprisingly 2021q1_to_q2 saw a higher rate of decrease of 68% in Sulfur Dioxide 
+        emissions suggesting a significant dropoff in fossil fuel burning as attributed to 
+        energy production in electric utilities in comparison to 2020q1_to_q2's rate of decrease of
+        53%. 
+        (Source: <a href= "https://www.dhs.wisconsin.gov/chemical/sulfurdioxide.htm" target="_blank" rel="noopener noreferrer">Wisconsin DOH</a>)
+    </p>
+</ul>
+
+<ul>
+    <a name="queens">
+    <li> <h4>Queens</h4>
+    == CO Quarterly BoxPlot+Table, pct_change LinePlot+Table: <br>
+    <img src=imgs/queens/queens_CO_boxplot.png max-width=50% height=40% />
+    <img src=imgs/queens/queens_CO_TABLE.png max-width=25% height=40% />
+    <br>
+    <img src=imgs/queens/queens_CO_pct_lineplot_site124.png max-width=40% height=45% />
+    <img src=imgs/queens/queens_CO_pct_change_site124_TABLE.png max-width=30% height=40% />
+    <p>Here, consistent with the Carbon Monoxide comparison results with the Bronx,
+        2020q1_to_q2 had a higher percent of decrease of 27% in comparison to 2021q1_to_q2's
+        decrease of 19%.
+    </p>
+    == NOx Quarterly BoxPlot+Table, pct_change LinePlot+Table: <br>
+    # Note: site124 is the only one that has complete set of NOx data
+    (site125 missing 2021 data readings) <br>
+    <img src=imgs/queens/queens_NOx_boxplot.png max-width=50% height=40% />
+    <img src=imgs/queens/queens_NOx_TABLE.png max-width=25% height=40% />
+    <br>
+    <img src=imgs/queens/queens_NOx_pct_lineplot_site124.png max-width=40% height=45% />
+    <img src=imgs/queens/queens_NOx_pct_change_site124_TABLE.png max-width=30% height=40% />
+    <p> Here, Queens NOx readings and trends are awfully consistent with Bronx NOx readings
+        with a high peak of decrease marked within the periods of 2020q1_to_q2
+        and consistent level of decrease rate centered around 40% during the period of 2021q1_to_q2 
+        and 2019q1_to_q2 for both Queens and the Bronx. 
+    </p>
+    == SO2 Quarterly BoxPlot+Table, pct_change LinePlot+Table: <br>
+    <img src=imgs/queens/queens_SO2_Annual_1971_boxplot.png max-width=50% height=40% />
+    <img src=imgs/queens/queens_SO2_TABLE.png max-width=25% height=40% />
+    <br>
+    <img src=imgs/queens/queens_SO2_pct_lineplot.png max-width=40% height=45% />
+    <img src=imgs/queens/queens_SO2_pct_change_TABLE.png max-width=30% height=40% />
+    <p> Here, Queens recording readings for pct change are fluctuating consistent with Bronx's
+        rate of pct change which provides no signfiicant analytical value...
+    </p>
+</ul>
+
+<ul>
+    <a name="manhattan">
+    <li> <h4>Manhattan</h4>
+    == CO Quarterly BoxPlot+Table, pct_change LinePlot+Table: <br>
+    <img src=imgs/manhattan/manhattan_CO_boxplot.png max-width=50% height=40% />
+    <img src=imgs/manhattan/manhattan_CO_TABLE.png max-width=25% height=25% />
+    <br>
+    <img src=imgs/manhattan/manhattan_CO_pct_lineplot.png max-width=40% height=45% />
+    <img src=imgs/manhattan/manhattan_CO_pct_change_TABLE.png max-width=30% height=40% />
+    <p>Here, consistent with the Carbon Monoxide comparison results with Queens and the Bronx, 
+        in Manhattan, 2020q1_to_q2 had a higher percent decrease of 44% in comparison to 
+        2021q1_to_q2's decrease of only 23% given the period transitions which suggest that
+        the period of perceived decreased transportation activity may have had a 
+        tremendous effect on carbon monoxide emissions.
+    </p>
+</ul>
+
+<a name="nextsteps">
+<h3>Next Steps:</h3>
+<p> In the future, I hope to provide a more clear analysis by properly using Linear Regression to determine a linear pattern
+from the given data. As such, it would likely be very useful to utilize sklearn's Linear Regression library to execute such a plan..
+</p> 
+<p> It would also be useful to format the website's components into tab components 
+    as to make it easier for the viewer to digest the content..
+</p>
+
+<a name="citations">
+<h3>Citations:</h3>
+<ul>
+    Query Link for obtaining pollutant/chemical parameters: <br>
+    <a href="https://aqs.epa.gov/data/api/list/parametersByClass?email=test@aqs.api&key=test&pc=ALL" target="_blank" rel="noopener noreferrer">
+        https://aqs.epa.gov/data/api/list/parametersByClass?email=test@aqs.api&key=test&pc=ALL
+    </a> <br>
+    <br> Main Documentation: <br>
+    <a href="https://aqs.epa.gov/aqsweb/documents/data_api.html#meta" target="_blank" rel="noopener noreferrer">
+    https://aqs.epa.gov/aqsweb/documents/data_api.html#meta
+    </a> <br>
+
+    <br> Sources: <br>
+    get data: <a href="https://stackoverflow.com/questions/12965203/how-to-get-json-from-webpage-into-python-script" target="_blank" rel="noopener noreferrer">
+        https://stackoverflow.com/questions/12965203/how-to-get-json-from-webpage-into-python-script
+    </a> <br>
+    read data: <a href="https://stackoverflow.com/questions/1871524/how-can-i-convert-json-to-csv/58648286#58648286" target="_blank" rel="noopener noreferrer">
+        https://stackoverflow.com/questions/1871524/how-can-i-convert-json-to-csv/58648286#58648286
+    </a> <br>
+    convert list of dictionaries to dataframe: <br>
+    <a href="https://stackoverflow.com/questions/20638006/convert-list-of-dictionaries-to-a-pandas-dataframe" target="_blank" rel="noopener noreferrer">
+        https://stackoverflow.com/questions/20638006/convert-list-of-dictionaries-to-a-pandas-dataframe
+    </a> <br>
+
+    <br> Seaborn documentation: <br>
+    <a href="https://seaborn.pydata.org/generated/seaborn.barplot.html" target="_blank" rel="noopener noreferrer">
+        https://seaborn.pydata.org/generated/seaborn.barplot.html
+    </a> <br>
+    <a href="https://stackoverflow.com/questions/36220829/fine-control-over-the-font-size-in-seaborn-plots-for-academic-papers/36222162" target="_blank" rel="noopener noreferrer">
+        https://stackoverflow.com/questions/36220829/fine-control-over-the-font-size-in-seaborn-plots-for-academic-papers/36222162
+    </a> <br>
+</ul>
 </body>

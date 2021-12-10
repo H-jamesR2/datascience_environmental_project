@@ -1,3 +1,17 @@
+"""
+Title: “New York City Quarantine Analysis on Greenhouse Gas Emissions”
+Resources: # Libraries (mainly used):
+      urllib.request, pandas, NumPy, json, seaborn, matplotlib
+URL: https://jamswhat2.github.io/datascience_environmental_project/
+Github: https://github.com/Jamswhat2/datascience_environmental_project
+
+The main data source for this project is generated through the 
+aqs.epa.gov data API and is indexed at the quarterlyData, byCounty level 
+generating JSON files which can be converted to csv files 
+for each particular borough which we can use for analysis and visualization later on.
+Typical Query used:
+      https://aqs.epa.gov/data/api/quarterlyData/byCounty?email=Hilarion.Reyes12@myhunter.cuny.edu&key=amberram68&param=45201&bdate=20200101&edate=20201231&state=36&county=005
+"""
 # have to show because secrets.py not visible on gradescope..
 API_user_email = "Hilarion.Reyes12@myhunter.cuny.edu"
 API_user_key = "amberram68"
@@ -12,6 +26,7 @@ import json
 
 print(API_user_email, API_user_key)
 """
+# File Repository: https://github.com/Jamswhat2/datascience_environmental_project
 # State Code = 36
 New York:
       "code": "001","value_represented": "Albany"   "code": "003","value_represented": "Allegany" (001 to 123)
@@ -59,15 +74,20 @@ base_query = "https://aqs.epa.gov/data/api/quarterlyData/byCounty?email=" + \
     str(API_user_email)+"&key="+str(API_user_key)
 
 # ============================================#
+# combines year and quarter for generating chart x_labels.
 def combine_date(year, quarter):
       return str(str(year) +'_q'+ str(quarter))
 
+# unpacks pct_change list/series and returns pct_change array
 def unpack_pct_change_list(pct_list):
       new_array = []
       for val in pct_list:
             new_array.append(val[0])
       return np.array(new_array)
 
+# generates county/borough dataframes accounting for: 
+# pollutant parameters ("codes" within array), county code, and
+# the template query (standard)
 def generate_county_df(template_query, pollutant_param_array, county_code):
       pollutant_queries = []
 
