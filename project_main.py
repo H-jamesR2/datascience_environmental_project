@@ -1,4 +1,6 @@
 """
+Name: Hilarion Reyes
+Email: hilarion.reyes12@myhunter.cuny.edu
 Title: “New York City Quarantine Analysis on Greenhouse Gas Emissions”
 Resources: # Libraries (mainly used):
       urllib.request, pandas, NumPy, json, seaborn, matplotlib
